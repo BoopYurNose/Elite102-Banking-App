@@ -10,6 +10,12 @@ Data.execute('''CREATE TABLE IF NOT EXISTS users
 
 # Inserting Data
 Data.execute("INSERT INTO users (name, age) VALUES ('Amelia', 22)")
+
 Connection.commit()
+
+Data.execute("SELECT * FROM users")
+rows = Connection.fetchall()
+for row in rows:
+    print(row)
 
 Connection.close()
