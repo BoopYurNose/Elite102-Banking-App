@@ -25,9 +25,11 @@ def LineFormat(AmountLines):
 
     print(LineFormat)
 
-def AccountCreationValidator(Name, Username = None, Password = None):
+def AccountCreationValidator(Name, Username = None, Password = None,):
     if not Username == None:
-        pass
+        return True
+    else:
+        return False
         # validate Username here
 
     if not Password == None:
@@ -35,6 +37,7 @@ def AccountCreationValidator(Name, Username = None, Password = None):
         # Validate the password here
     
     if Name.isalpha():
+        # Character Limit maybe?
         return True
     else:
         return False
@@ -68,6 +71,7 @@ def MainMenu():
             NameInput = input("Please input your name Only include your first name with no numbers:")
         
         UsernameInput = input("Please input your username now")
+        while not AccountCreationValidator(NameInput, UsernameInput)
 
 
     
