@@ -17,6 +17,18 @@ A simple menu-driven interface (terminal UI)'''
 # you should add a character limit to the inputs of money, username, password, etc so some jackass doesn't type like 1,000 characters
 # and mess up the formatting lmfao
 
+def Contains_UppercaseLower(Input, Check):
+    if Check == "Upper":
+        if any(Letter.isupper() for Letter in Input):
+            return True
+        else:
+            return False
+    elif Check == "Lower":
+        if any(Letter.islower() for Letter in Input):
+            return True
+        else:
+            return False
+
 def LineFormat(AmountLines):
     Lines = AmountLines
     LineFormat = ""
@@ -25,7 +37,7 @@ def LineFormat(AmountLines):
 
     print(LineFormat)
 
-def AccountCreationValidator(Name = None, Username = None, Password = None,):
+def AccountCreationValidator(Name = None, Username = None, Password = None):
     Iterator = 0
     CharacterLimit = 20
 
@@ -42,8 +54,11 @@ def AccountCreationValidator(Name = None, Username = None, Password = None,):
             return False
         # validate Username here
 
-    if not Password == None:
-        pass
+    if not Password == None: # it has to contain atleast an uppercase and lowercase letter, and at the minimum 1 number character
+        if Password.isalpha():
+            if Contains_UppercaseLower(Password, "Upper"):
+                print("You have atleast 1 capitlizated character here")
+                return True
         # Validate the password here
     
     if not Name == None:
