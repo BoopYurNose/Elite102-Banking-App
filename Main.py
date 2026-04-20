@@ -17,7 +17,7 @@ A simple menu-driven interface (terminal UI)'''
 # you should add a character limit to the inputs of money, username, password, etc so some jackass doesn't type like 1,000 characters
 # and mess up the formatting lmfao
 
-def Contains_UppercaseLower(Input, Check):
+def Contains_UppercaseLowerNumber(Input, Check): # I made this for password validation, (probably don't use this for anything else unless it has same requirements as the password)
     if Check == "Upper":
         if any(Letter.isupper() for Letter in Input):
             return True
@@ -25,6 +25,11 @@ def Contains_UppercaseLower(Input, Check):
             return False
     elif Check == "Lower":
         if any(Letter.islower() for Letter in Input):
+            return True
+        else:
+            return False
+    elif Check == "Numbers":
+        if any(Number.isdigit() for Number in Input):
             return True
         else:
             return False
@@ -40,25 +45,37 @@ def LineFormat(AmountLines):
 def AccountCreationValidator(Name = None, Username = None, Password = None):
     Iterator = 0
     CharacterLimit = 20
+    PasswordMinChars = 10
 
     # NOTE to self: this setup is really weird, I don't like it and I might change it.
     if not Username == None:
         if Username.isalpha():
             for Characters in Username:
                 Iterator += 1
-                if Iterator >= CharacterLimit:
+                if Iterator > CharacterLimit:
                     print("Too long")
                     return False
             return True
         else:
             return False
-        # validate Username here
 
-    if not Password == None: # it has to contain atleast an uppercase and lowercase letter, and at the minimum 1 number character
+
+    if not Password == None: # it has to contain atleast an uppercase and lowercase letter, and at the minimum 1 number character and atleast 10 characters long
         if Password.isalpha():
-            if Contains_UppercaseLower(Password, "Upper"):
-                print("You have atleast 1 capitlizated character here")
-                return True
+            if Contains_UppercaseLowerNumber(Password, "Upper") and Contains_UppercaseLowerNumber(Password, "Lower") and Contains_UppercaseLowerNumber(Password, "Numbers"):
+                print(Contains_UppercaseLowerNumber(Password, "Upper"))                            
+                print(Contains_UppercaseLowerNumber(Password, "Lower"))                        
+                print(Contains_UppercaseLowerNumber(Password, "Number"))                        
+                for Characters in Password: #NOTE  this part is bugged and it's probably something to do with the character requirement thing here
+                    Iterator += 1 # FIX THIS!
+
+                if Iterator < PasswordMinChars:
+                    return False
+                else:
+                    return True
+            else:
+                return False
+            
         # Validate the password here
     
     if not Name == None:
@@ -67,7 +84,7 @@ def AccountCreationValidator(Name = None, Username = None, Password = None):
                 Iterator += 1
                 if Characters.isdigit():
                     return False
-                if Iterator >= CharacterLimit:
+                if Iterator > CharacterLimit:
                     print("Too long")
                     return False
             return True
@@ -121,7 +138,7 @@ def MainMenu():
 
         while not AccountCreationValidator(None, None, PasswordInput):
             print("Try again you need to fufill all the requirements for creating a password")
-            PasswordInput = input("Now type in your password it has to contain atleast an uppercase and lowercase letter, and at the minimum 1 number character: ")
+            PasswordInput = input("Now type in your password it has to contain atleast an uppercase and lowercase letter, and at the minimum 1 number character And atleast 10 characters long: ")
 
 
 
