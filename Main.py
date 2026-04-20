@@ -68,13 +68,14 @@ def AccountCreationValidator(Name = None, Username = None, Password = None):
                 print(Contains_UppercaseLowerNumber(Password, "Number"))                        
                 for Characters in Password: #NOTE  this part is bugged and it's probably something to do with the character requirement thing here
                     Iterator += 1 # FIX THIS!
+                    print(Iterator)
 
-                if Iterator < PasswordMinChars:
-                    return False
-                else:
-                    return True
-            else:
+            if Iterator < PasswordMinChars:
                 return False
+            else:
+                return True
+        else:
+            return False
             
         # Validate the password here
     
