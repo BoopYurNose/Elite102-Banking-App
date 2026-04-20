@@ -43,12 +43,14 @@ def AccountCreationValidator(Name = None, Username = None, Password = None,):
         if Name.isalpha():
             for Characters in Name:
                 Iterator += 1
+                if Characters.isdigit():
+                    return False
                 if Iterator >= CharacterLimit:
                     print("Too long")
                     return False
-        return True
-    else:
-        return False
+            return True
+        else:
+            return False
     
 
 
@@ -78,7 +80,6 @@ def MainMenu():
         while not AccountCreationValidator(NameInput):
             print("Try again you need to input your name with NO NUMBERS")
             NameInput = input("Please input your name Only include your first name with no numbers:")
-            AccountCreationValidator(NameInput)
 
         if NameInput.lower() == "exit":
             MainMenu()
