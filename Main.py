@@ -31,7 +31,7 @@ def AccountCreationValidator(Name, Username = None, Password = None,):
     NameCheck = False
     UsernameCheck = False
     PasswordCheck = False
-    
+    # NOTE to self: this setup is really weird, I don't like it and I might change it.
     if Username
     if not Username == None:
         return True
