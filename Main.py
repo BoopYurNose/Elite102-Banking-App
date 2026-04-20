@@ -26,6 +26,13 @@ def LineFormat(AmountLines):
     print(LineFormat)
 
 def AccountCreationValidator(Name, Username = None, Password = None,):
+    Iterator = 0
+    CharacterLimit = 20
+    NameCheck = False
+    UsernameCheck = False
+    PasswordCheck = False
+    
+    if Username
     if not Username == None:
         return True
     else:
@@ -37,6 +44,10 @@ def AccountCreationValidator(Name, Username = None, Password = None,):
         # Validate the password here
     
     if Name.isalpha():
+        for Characters in Name:
+            Iterator += 1
+            if Iterator >= CharacterLimit:
+                print("Too long")
         # Character Limit maybe?
         return True
     else:
@@ -64,14 +75,14 @@ def MainMenu():
         print("Make sure to remember these login credientials that you create \n becuase you will need to use these to login")
         print("After you've completed your account creation \n")
 
-        NameInput = input("Please input your name Only include your first name with no numbers:")
+        NameInput = input("Please input your name Only include your first name with no numbers also a maximum of 20 characters long:")
 
         while not AccountCreationValidator(NameInput):
             print("Try again you need to input your name with NO NUMBERS")
             NameInput = input("Please input your name Only include your first name with no numbers:")
         
         UsernameInput = input("Please input your username now")
-        while not AccountCreationValidator(NameInput, UsernameInput)
+        #while not AccountCreationValidator(NameInput, UsernameInput)
 
 
     
