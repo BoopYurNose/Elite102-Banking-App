@@ -30,9 +30,16 @@ def AccountCreationValidator(Name = None, Username = None, Password = None,):
     CharacterLimit = 20
 
     # NOTE to self: this setup is really weird, I don't like it and I might change it.
-
     if not Username == None:
-        return True
+        if Username.isalpha():
+            for Characters in Username:
+                Iterator += 1
+                if Iterator >= CharacterLimit:
+                    print("Too long")
+                    return False
+            return True
+        else:
+            return False
         # validate Username here
 
     if not Password == None:
@@ -86,8 +93,10 @@ def MainMenu():
             return
 
 
-        UsernameInput = input("Please input your username now")
-        #while not AccountCreationValidator(NameInput, UsernameInput)
+        UsernameInput = input("Please input your username now (numbers allowed but no longer than 20 characters):")
+        while not AccountCreationValidator(None, UsernameInput):
+            print("Try again you have surpassed the character limit")
+            UsernameInput = input("Please input your username now (numbers allowed but no longer than 20 characters):")
 
 
     
