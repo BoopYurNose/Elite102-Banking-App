@@ -98,6 +98,17 @@ def MainMenu():
             print("Try again you have surpassed the character limit")
             UsernameInput = input("Please input your username now (numbers allowed but no longer than 20 characters):")
 
+        if UsernameInput.lower() == "exit":
+            MainMenu()
+            return
+        
+        PasswordInput = input("Now type in your password it has to contain atleast an uppercase and lowercase letter, and at the minimum 1 number character: ")
+
+        while not AccountCreationValidator(None, None, PasswordInput):
+            print("Try again you need to fufill all the requirements for creating a password")
+            PasswordInput = input("Now type in your password it has to contain atleast an uppercase and lowercase letter, and at the minimum 1 number character: ")
+
+
 
     
     
