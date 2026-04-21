@@ -17,6 +17,9 @@ A simple menu-driven interface (terminal UI)'''
 # you should add a character limit to the inputs of money, username, password, etc so some jackass doesn't type like 1,000 characters
 # and mess up the formatting lmfao
 
+# I will have it only allow you to have access to the account balance, manage accounts/list them, deposit money, widthdraw money, view transaction history etc
+# after you've logged in to an account or have an account logged in
+
 def Contains_UppercaseLowerNumber(Input, Check): # I made this for password validation, (probably don't use this for anything else unless it has same requirements as the password)
     if Check == "Upper":
         if any(Letter.isupper() for Letter in Input):
@@ -93,21 +96,25 @@ def AccountCreationValidator(Name = None, Username = None, Password = None):
 
     
 
-def MainMenu():
+def StartMenu():
     LineFormat(50)
-    print("Welcome to my banking application! \n Would you like to either Sign in Type: SignIn \n Or would you like to Sign up Type: SignUp")
+    print("Welcome to my banking application! \n Would you like to either Sign in Type: SignIn \n Or would you like to Sign up Type: SignUp \n if you want to exit simply just type: Exit")
 
     UserChoice = input(":")
-    if not UserChoice.lower() == "signin" and not UserChoice.lower() == "signup":
+    if not UserChoice.lower() == "signin" and not UserChoice.lower() == "signup" and not UserChoice.lower == "exit":
         print("Try again you can only pick either SignIn or SignUp by typing those and pressing enter \n")
-        MainMenu()
+        StartMenu()
+        return
+    elif UserChoice.lower() == "exit":
+        print("Goodbye!")
+        LineFormat(50)
         return
     elif UserChoice.lower() == "signin":
         # have sign in thing here
         pass
     elif UserChoice.lower() == "signup":
         LineFormat(50)
-        print("Welcome to the sign up page \n if for any reason you would like to return to the MainMenu Type: Exit \n to any of the prompts")
+        print("Welcome to the sign up page \n if for any reason you would like to return to the StartMenu Type: Exit \n to any of the prompts")
         print("You will now input your name, username, password \n then after doing so you will be returned to the main menu")
         print("Make sure to remember these login credientials that you create \n becuase you will need to use these to login")
         print("After you've completed your account creation \n")
@@ -119,7 +126,7 @@ def MainMenu():
             NameInput = input("Please input your name Only include your first name with no numbers:")
 
         if NameInput.lower() == "exit":
-            MainMenu()
+            StartMenu()
             return
 
 
@@ -129,7 +136,7 @@ def MainMenu():
             UsernameInput = input("Please input your username now (numbers allowed but no longer than 20 characters):")
 
         if UsernameInput.lower() == "exit":
-            MainMenu()
+            StartMenu()
             return
         
         PasswordInput = input("Now type in your password it has to contain atleast an uppercase and lowercase letter, and at the minimum 1 number character: ")
@@ -141,7 +148,7 @@ def MainMenu():
         print("Great job on making an acccount, returning back to the main menu. \n")
 
         # For future reference here, when you figure out the SQLlite3 better, make these values into an account value that can be used as account credentials to login
-        MainMenu()
+        StartMenu()
         return
         
         
@@ -150,5 +157,5 @@ def MainMenu():
 
     
     
-MainMenu()
+StartMenu()
 
