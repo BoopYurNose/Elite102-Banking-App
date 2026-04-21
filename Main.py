@@ -30,8 +30,10 @@ def Contains_UppercaseLowerNumber(Input, Check): # I made this for password vali
             return False
     elif Check == "Numbers":
         if any(Number.isdigit() for Number in Input):
+            print("Work?")
             return True
         else:
+            print("No numbers")
             return False
 
 def LineFormat(AmountLines):
@@ -47,7 +49,6 @@ def AccountCreationValidator(Name = None, Username = None, Password = None):
     CharacterLimit = 20
     PasswordMinChars = 10
 
-    # NOTE to self: this setup is really weird, I don't like it and I might change it.
     if not Username == None:
         if Username.isalpha():
             for Characters in Username:
@@ -61,14 +62,10 @@ def AccountCreationValidator(Name = None, Username = None, Password = None):
 
 
     if not Password == None: # it has to contain atleast an uppercase and lowercase letter, and at the minimum 1 number character and atleast 10 characters long
-        if Password.isalpha():
-            if Contains_UppercaseLowerNumber(Password, "Upper") and Contains_UppercaseLowerNumber(Password, "Lower") and Contains_UppercaseLowerNumber(Password, "Numbers"):
-                print(Contains_UppercaseLowerNumber(Password, "Upper"))                            
-                print(Contains_UppercaseLowerNumber(Password, "Lower"))                        
-                print(Contains_UppercaseLowerNumber(Password, "Number"))                        
-                for Characters in Password: #NOTE  this part is bugged and it's probably something to do with the character requirement thing here
-                    Iterator += 1 # FIX THIS!
-                    print(Iterator)
+        if Password.isalnum():
+            if Contains_UppercaseLowerNumber(Password, "Upper") and Contains_UppercaseLowerNumber(Password, "Lower") and Contains_UppercaseLowerNumber(Password, "Numbers"):                 
+                for Characters in Password:
+                    Iterator += 1
 
             if Iterator < PasswordMinChars:
                 return False
@@ -140,6 +137,14 @@ def MainMenu():
         while not AccountCreationValidator(None, None, PasswordInput):
             print("Try again you need to fufill all the requirements for creating a password")
             PasswordInput = input("Now type in your password it has to contain atleast an uppercase and lowercase letter, and at the minimum 1 number character And atleast 10 characters long: ")
+
+        print("Great job on making an acccount, returning back to the main menu. \n")
+
+        # For future reference here, when you figure out the SQLlite3 better, make these values into an account value that can be used as account credentials to login
+        MainMenu()
+        return
+        
+        
 
 
 
