@@ -101,7 +101,7 @@ def StartMenu():
     print("Welcome to my banking application! \n Would you like to either Sign in Type: SignIn \n Or would you like to Sign up Type: SignUp \n if you want to exit simply just type: Exit")
 
     UserChoice = input(":")
-    if not UserChoice.lower() == "signin" and not UserChoice.lower() == "signup" and not UserChoice.lower == "exit":
+    if not UserChoice.lower() == "signin" and not UserChoice.lower() == "signup" and not UserChoice.lower() == "exit":
         print("Try again you can only pick either SignIn or SignUp by typing those and pressing enter \n")
         StartMenu()
         return
