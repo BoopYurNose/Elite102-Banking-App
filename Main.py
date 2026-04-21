@@ -33,7 +33,6 @@ def Contains_UppercaseLowerNumber(Input, Check): # I made this for password vali
             return False
     elif Check == "Numbers":
         if any(Number.isdigit() for Number in Input):
-            print("Work?")
             return True
         else:
             print("No numbers")
@@ -110,8 +109,23 @@ def StartMenu():
         LineFormat(50)
         return
     elif UserChoice.lower() == "signin":
-        # have sign in thing here
-        pass
+        LineFormat(50)
+        print("welcome to the SignIn page! \n if you'd like to login type: Login \n if you forgot your username type: ForgotUsername \n otherwise if you'd like to be returned back to the StartMenu Type: Exit")
+
+        UserOption = input(":")
+        if not UserOption.lower() == "login" and not UserOption.lower() == "forgotusername" and not UserOption.lower() == "exit":
+            print("You can only input the following options \n login \n forgotusername \n exit \n Try again the next time you come to the SignIn page")
+            StartMenu()
+            return
+        elif UserOption.lower() == "login":
+            print("prompt user for username and password")
+        elif UserOption.lower() == "forgotusername":
+            print("have the user verify themselves by typing in their name that is associated with the account \n then it'll give the user the username of all account names with that associated name they inputted")
+        elif UserOption.lower() == "exit":
+            StartMenu()
+            return
+        
+        
     elif UserChoice.lower() == "signup":
         LineFormat(50)
         print("Welcome to the sign up page \n if for any reason you would like to return to the StartMenu Type: Exit \n to any of the prompts")
