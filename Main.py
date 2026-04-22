@@ -90,6 +90,11 @@ def AccountCreationValidator(Name = None, Username = None, Password = None):
             return True
         else:
             return False
+
+
+def AccountMenu(ID, Balance, TransactionHistory):
+    pass
+    # display balance, and a menu to view transactions, and etc
     
 
 
@@ -118,7 +123,28 @@ def StartMenu():
             StartMenu()
             return
         elif UserOption.lower() == "login":
-            print("prompt user for username and password")
+            UsernameLogin = input("Type your username:")
+            PasswordLogin = input("Type in your password:")
+
+            ID = 1 # Temporarily hardcoded
+            UserBalance = 1.94
+            TransactionHistory = [ #Later each transaction will be incremented starting at 1 and incrementing + 1 for each new transaction (for now it's hardcoded)
+                [1] == {
+                    "ID": 1,
+                    "Date": "4/12/26",
+                    "Transaction": -10,
+                    "TransactionDescription": "10 usd on amazon.com",
+                },
+            ]
+
+            ''' do some sort of for loop here to iterate through the sqllite3 users data to see if the
+            username and password that the user inputted matches any credientials that are in the system
+            for now since I haven't gotten the database up yet, it'll be hardcoded to login to an account with hardcoded values
+            temporarily just for now normally I'd get these values that I'm passing into this function from the data from the table of that specific user
+            '''
+
+            AccountMenu(ID, UserBalance, TransactionHistory)
+
         elif UserOption.lower() == "forgotusername":
             print("have the user verify themselves by typing in their name that is associated with the account \n then it'll give the user the username of all account names with that associated name they inputted")
         elif UserOption.lower() == "exit":
@@ -164,12 +190,7 @@ def StartMenu():
         # For future reference here, when you figure out the SQLlite3 better, make these values into an account value that can be used as account credentials to login
         StartMenu()
         return
-        
-        
-
-
-
-    
-    
 StartMenu()
+
+
 
