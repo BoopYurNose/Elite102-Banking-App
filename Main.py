@@ -93,7 +93,11 @@ def AccountCreationValidator(Name = None, Username = None, Password = None):
 
 
 def AccountMenu(ID, Balance, TransactionHistory):
-    print(ID, Balance, TransactionHistory[ID])
+    print(f"Hello, your balance is \n {Balance}")
+    print("\n Wha would you like to do \n AddMoney \n WithdrawMoney \n ViewTransactions \n Logout")
+    for Transactions in TransactionHistory:
+        if ID == Transactions["UserID"]:
+            print(Transactions[])
     # display balance, and a menu to view transactions, and etc
     
 
@@ -130,14 +134,13 @@ def StartMenu():
             UserBalance = 1.94
             TransactionHistory = [ #Later each transaction will be incremented starting at 1 and incrementing + 1 for each new transaction (for now it's hardcoded)
                 {
-                    "UserID":  0,
+                    "UserID": 0,
                     "TransactionID": 1,
                     "Date": "4/12/26",
                     "Transaction": -10,
                     "TransactionDescription": "10 usd on amazon.com",
                 },
             ]
-            print(TransactionHistory[0])
 
             ''' do some sort of for loop here to iterate through the sqllite3 users data to see if the
             username and password that the user inputted matches any credientials that are in the system
