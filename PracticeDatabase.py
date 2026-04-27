@@ -8,10 +8,13 @@ Cur = DatabaseConnection.cursor()
 
 # Query The Database
 
-Cur.execute("SELECT * FROM people")
+Cur.execute("SELECT rowid, * FROM people")
 #print(Cur.fetchone())
 #Cur.fetchmany(3)
-print(Cur.fetchall())
+Data = Cur.fetchall()
+
+for Items in Data:
+    print(Items)
 
 
 #print("NAME" + "\t\tEMAIL")
