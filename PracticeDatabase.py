@@ -6,6 +6,23 @@ DatabaseConnection = sqlite3.connect("Customer.db")
 # Create a cursor
 Cur = DatabaseConnection.cursor()
 
+# Query The Database
+
+Cur.execute("SELECT * FROM people")
+#print(Cur.fetchone())
+#Cur.fetchmany(3)
+print(Cur.fetchall())
+
+
+#print("NAME" + "\t\tEMAIL")
+#print("-------" + "\t\t-------")
+#Items = Cur.fetchall()
+#for Stuff in Items:
+#    print(Stuff[0] + "\t" + Stuff[1] + "\t" + Stuff[2])
+
+
+'''ManyPeople = [('Tetsuya', 'Kiriyu', 'Tetsuya@gmail.com'), ('Ohma', 'Tokita', 'Ohma@gmail.com'), ('Luh', 'Luau', 'luhluaprogrammer@gmail.com')]
+
 # Create a table
 Cur.execute("""CREATE TABLE IF NOT EXISTS people (
         FirstName text,
@@ -14,16 +31,17 @@ Cur.execute("""CREATE TABLE IF NOT EXISTS people (
     )""")
 
 # sqlite3 datatypes
-'''
+
 NULL
 INTEGER
 REAL
 TEXT
 BLOB
-'''
+
 
 Cur.execute("INSERT INTO people VALUES ('Pumpkin', 'Cat', 'kittycat@gmail.com')")
-
+Cur.executemany("INSERT INTO people VALUES (?,?,?)", ManyPeople)
+'''
 print("Successfully ran!")
 # Commit our command
 DatabaseConnection.commit()
