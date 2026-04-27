@@ -3,7 +3,7 @@ Your banking app must support:
 
 DONE: Create new bank accounts (name, initial deposit)
 Create a database for these bank accounts
-Deposit money into an account
+Done: Deposit money into an account
 Withdraw money (with balance validation)
 DONE: Check account balance
 List / manage existing accounts: (for this in the database I will have a simple boolean value of either true or false that will tell if the user is logged in or not based on that boolean value)
@@ -96,7 +96,7 @@ def AccountCreationValidator(Name = None, Username = None, Password = None):
 def AccountMenu(ID, Balance, TransactionHistory):
     LineFormat(50)
     print(f"Hello, your balance is \n {Balance}")
-    print("\n What would you like to do \n AddMoney \n WithdrawMoney \n ViewTransactions /n ManageAccounts /n BackToMainMenu \n Logout")
+    print("\n What would you like to do \n AddMoney \n WithdrawMoney \n ViewTransactions \n ManageAccounts \n BackToMainMenu \n Logout")
     UserInput = input(":")
     if not UserInput.lower() == "addmoney" and not UserInput.lower() == "withdrawmoney" and not UserInput.lower() == "viewtransactions" and not UserInput.lower() == "manageaccounts" and not UserInput.lower() == "backtomainmenu" and not UserInput.lower() == "logout":
         print("Try again you need to type in a valid choice \n returning to StartMenu")
@@ -104,16 +104,27 @@ def AccountMenu(ID, Balance, TransactionHistory):
         return
     elif UserInput.lower() == "addmoney":
         MoneyAddInput = input("How much money would you like to add: ")
-        try:
-            MoneyAddInput = int(MoneyAddInput)
-        except:
-            print("not valid") # finish this return to main menu
-
-
-    
-
+        if MoneyAddInput.isnumeric():
+            pass
+        else:
+            try:
+                float(MoneyAddInput)
+                if "-" in MoneyAddInput:
+                    print("Sorry you cannot put in negative values, try again")
+                    StartMenu()
+                    return
+            except ValueError:
+                print("Not valid number")
+                StartMenu()
+                return
+        Balance = Balance + MoneyAddInput #We will change this system later
+        print(f"added {MoneyAddInput} amount to your balance \n your new balance is {Balance} \n returning to main menu")
+        StartMenu()
+        return
     elif UserInput.lower() == "withdrawmoney":
-        print("do withdraw money here validate the balance is able to faciliate the transaction")
+        print(f"You currently have {Balance} in your account, ")
+        
+
     elif UserInput.lower() == "viewtransactions":
         for Transactions in TransactionHistory:
             if ID == Transactions["UserID"]:
@@ -129,7 +140,6 @@ def AccountMenu(ID, Balance, TransactionHistory):
         # Query through database here and logout
         StartMenu()
         return
-    # display balance, and a menu to view transactions, and etc
     
 
 
