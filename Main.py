@@ -1,12 +1,13 @@
 '''Project Requirements
 Your banking app must support:
 
-Create new bank accounts (name, initial deposit)
+DONE: Create new bank accounts (name, initial deposit)
 Deposit money into an account
 Withdraw money (with balance validation)
-Check account balance
-List / manage existing accounts
+DONE: Check account balance
+List / manage existing accounts (for this in the database I will have a simple bolean value of either true or false that will tell if the user is logged in or not based on that bolean value)
 A simple menu-driven interface (terminal UI)'''
+
 # This is my CLI if I finish this I will then make a web application version of this
 
 # NOTE: have the sqlite3 database have all account credientials/balances/etc stored
@@ -93,11 +94,12 @@ def AccountCreationValidator(Name = None, Username = None, Password = None):
 
 
 def AccountMenu(ID, Balance, TransactionHistory):
+    LineFormat(50)
     print(f"Hello, your balance is \n {Balance}")
-    print("\n Wha would you like to do \n AddMoney \n WithdrawMoney \n ViewTransactions \n Logout")
+    print("\n Wha would you like to do \n AddMoney \n WithdrawMoney \n ViewTransactions /n ManageAccounts /n BackToMainMenu \n Logout")
     for Transactions in TransactionHistory:
         if ID == Transactions["UserID"]:
-            print(Transactions[])
+            print(Transactions)
     # display balance, and a menu to view transactions, and etc
     
 
