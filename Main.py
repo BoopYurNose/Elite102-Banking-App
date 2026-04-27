@@ -2,10 +2,11 @@
 Your banking app must support:
 
 DONE: Create new bank accounts (name, initial deposit)
+Create a database for these bank accounts
 Deposit money into an account
 Withdraw money (with balance validation)
 DONE: Check account balance
-List / manage existing accounts (for this in the database I will have a simple bolean value of either true or false that will tell if the user is logged in or not based on that bolean value)
+List / manage existing accounts: (for this in the database I will have a simple boolean value of either true or false that will tell if the user is logged in or not based on that boolean value)
 A simple menu-driven interface (terminal UI)'''
 
 # This is my CLI if I finish this I will then make a web application version of this
@@ -77,7 +78,6 @@ def AccountCreationValidator(Name = None, Username = None, Password = None):
         else:
             return False
             
-        # Validate the password here
     
     if not Name == None:
         if Name.isalpha():
@@ -96,10 +96,39 @@ def AccountCreationValidator(Name = None, Username = None, Password = None):
 def AccountMenu(ID, Balance, TransactionHistory):
     LineFormat(50)
     print(f"Hello, your balance is \n {Balance}")
-    print("\n Wha would you like to do \n AddMoney \n WithdrawMoney \n ViewTransactions /n ManageAccounts /n BackToMainMenu \n Logout")
-    for Transactions in TransactionHistory:
-        if ID == Transactions["UserID"]:
-            print(Transactions)
+    print("\n What would you like to do \n AddMoney \n WithdrawMoney \n ViewTransactions /n ManageAccounts /n BackToMainMenu \n Logout")
+    UserInput = input(":")
+    if not UserInput.lower() == "addmoney" and not UserInput.lower() == "withdrawmoney" and not UserInput.lower() == "viewtransactions" and not UserInput.lower() == "manageaccounts" and not UserInput.lower() == "backtomainmenu" and not UserInput.lower() == "logout":
+        print("Try again you need to type in a valid choice \n returning to StartMenu")
+        StartMenu()
+        return
+    elif UserInput.lower() == "addmoney":
+        MoneyAddInput = input("How much money would you like to add: ")
+        try:
+            MoneyAddInput = int(MoneyAddInput)
+        except:
+            print("not valid") # finish this return to main menu
+
+
+    
+
+    elif UserInput.lower() == "withdrawmoney":
+        print("do withdraw money here validate the balance is able to faciliate the transaction")
+    elif UserInput.lower() == "viewtransactions":
+        for Transactions in TransactionHistory:
+            if ID == Transactions["UserID"]:
+                print(Transactions)
+    elif UserInput.lower() == "manageaccounts":
+        print("Display logged in accounts by displaying account usernames that have a boolean value of True (boolean value determines if it's logged in or not)")
+    elif UserInput.lower() == "backtomainmenu":
+        print("Going back to the main menu")
+        StartMenu()
+        return
+    elif UserInput.lower() == "Logout":
+        print("log out user here and return them to the MainMenu")
+        # Query through database here and logout
+        StartMenu()
+        return
     # display balance, and a menu to view transactions, and etc
     
 
@@ -124,15 +153,15 @@ def StartMenu():
         print("welcome to the SignIn page! \n if you'd like to login type: Login \n if you forgot your username type: ForgotUsername \n otherwise if you'd like to be returned back to the StartMenu Type: Exit")
 
         UserOption = input(":")
-        if not UserOption.lower() == "login" and not UserOption.lower() == "forgotusername" and not UserOption.lower() == "exit":
+        if not UserOption.lower() == "login" and not UserOption.lower() == "forgotusername" and not UserOption.lower() == "exit": # Finish this!!
             print("You can only input the following options \n login \n forgotusername \n exit \n Try again the next time you come to the SignIn page")
             StartMenu()
             return
         elif UserOption.lower() == "login":
             UsernameLogin = input("Type your username:")
             PasswordLogin = input("Type in your password:")
-
-            ID = 0 # Temporarily hardcoded
+            # Validate login credentials here
+            ID = 0 # Temporarily hardcoded just for an example
             UserBalance = 1.94
             TransactionHistory = [ #Later each transaction will be incremented starting at 1 and incrementing + 1 for each new transaction (for now it's hardcoded)
                 {
