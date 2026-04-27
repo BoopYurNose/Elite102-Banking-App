@@ -4,7 +4,7 @@ Your banking app must support:
 DONE: Create new bank accounts (name, initial deposit)
 Create a database for these bank accounts
 Done: Deposit money into an account
-Withdraw money (with balance validation)
+Done: Withdraw money (with balance validation)
 DONE: Check account balance
 List / manage existing accounts: (for this in the database I will have a simple boolean value of either true or false that will tell if the user is logged in or not based on that boolean value)
 A simple menu-driven interface (terminal UI)'''
@@ -122,8 +122,32 @@ def AccountMenu(ID, Balance, TransactionHistory):
         StartMenu()
         return
     elif UserInput.lower() == "withdrawmoney":
-        print(f"You currently have {Balance} in your account, ")
-        
+        print(f"You currently have {Balance} in your account, how much would you like to withdraw?")
+        WithdrawAmount = input(":")
+        if WithdrawAmount.isnumeric():
+            pass
+        else:
+            try:
+                float(WithdrawAmount)
+                if "-" in WithdrawAmount:
+                    print("Sorry you cannot put in negative values, try again")
+                    StartMenu()
+                    return
+            except ValueError:
+                print("Not valid number")
+                StartMenu()
+                return
+            
+        WithdrawAmount = int(WithdrawAmount)
+        if Balance >= WithdrawAmount: # Doesn't work for float numbers, figure out a fix
+            Balance = Balance - WithdrawAmount
+            print(f"After withdrawing {WithdrawAmount} your new balance is {Balance} \n returning to main menu")
+            StartMenu()
+            return
+        else:
+            print("Sorry you don't have enough money to withdraw this amount \n returning to main menu")
+            StartMenu()
+            return
 
     elif UserInput.lower() == "viewtransactions":
         for Transactions in TransactionHistory:
@@ -172,7 +196,7 @@ def StartMenu():
             PasswordLogin = input("Type in your password:")
             # Validate login credentials here
             ID = 0 # Temporarily hardcoded just for an example
-            UserBalance = 1.94
+            UserBalance = 165.59
             TransactionHistory = [ #Later each transaction will be incremented starting at 1 and incrementing + 1 for each new transaction (for now it's hardcoded)
                 {
                     "UserID": 0,
