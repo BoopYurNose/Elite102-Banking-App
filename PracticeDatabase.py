@@ -9,10 +9,23 @@ Cur = DatabaseConnection.cursor()
 # Query The Database
 
 #Cur.execute("SELECT rowid, * FROM people WHERE LastName LIKE 'Am%'")
-Cur.execute("SELECT rowid, * FROM people WHERE LastName LIKE 'Luau'")
-Cur.execute("SELECT rowid, * FROM people")
+#Cur.execute("SELECT rowid, * FROM people WHERE LastName LIKE 'Luau'")
+
 #print(Cur.fetchone())
 #Cur.fetchmany(3)
+
+
+# Update Records
+'''Cur.execute("""UPDATE people SET FirstName = 'Pumpkin'
+            WHERE rowid = 3
+""")
+'''
+
+# Delete Records
+Cur.execute("DELETE from people WHERE rowid = 6")
+
+Cur.execute("SELECT rowid, * FROM people")
+
 Data = Cur.fetchall()
 
 for Items in Data:
