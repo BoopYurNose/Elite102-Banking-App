@@ -8,6 +8,8 @@ Cur = DatabaseConnection.cursor()
 
 # Query The Database
 
+#Cur.execute("SELECT rowid, * FROM people WHERE LastName LIKE 'Am%'")
+Cur.execute("SELECT rowid, * FROM people WHERE LastName LIKE 'Luau'")
 Cur.execute("SELECT rowid, * FROM people")
 #print(Cur.fetchone())
 #Cur.fetchmany(3)
