@@ -2,7 +2,7 @@
 Your banking app must support:
 
 DONE: Create new bank accounts (name, initial deposit)
-Create a database for these bank accounts
+DONE: Create a database for these bank accounts
 Done: Deposit money into an account
 Done: Withdraw money (with balance validation)
 DONE: Check account balance
