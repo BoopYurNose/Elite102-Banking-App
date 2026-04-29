@@ -22,6 +22,8 @@ A simple menu-driven interface (terminal UI)'''
 # I will have it only allow you to have access to the account balance, manage accounts/list them, deposit money, widthdraw money, view transaction history etc
 # after you've logged in to an account or have an account logged in
 
+import BankDatabase
+
 def Contains_UppercaseLowerNumber(Input, Check): # I made this for password validation, (probably don't use this for anything else unless it has same requirements as the password)
     if Check == "Upper":
         if any(Letter.isupper() for Letter in Input):
