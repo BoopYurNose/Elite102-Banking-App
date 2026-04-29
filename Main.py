@@ -183,6 +183,7 @@ def StartMenu():
     elif UserChoice.lower() == "exit":
         print("Goodbye!")
         LineFormat(50)
+        BankDatabase.CloseDatabase
         return
     elif UserChoice.lower() == "signin":
         LineFormat(50)
@@ -197,9 +198,9 @@ def StartMenu():
             UsernameLogin = input("Type your username:")
             PasswordLogin = input("Type in your password:")
             # Validate login credentials here
-            ID = 0 # Temporarily hardcoded just for an example
-            UserBalance = 165.59
-            TransactionHistory = [ #Later each transaction will be incremented starting at 1 and incrementing + 1 for each new transaction (for now it's hardcoded)
+            #ID = 0 # Temporarily hardcoded just for an example
+            #UserBalance = 165.59
+            '''TransactionHistory = [ #Later each transaction will be incremented starting at 1 and incrementing + 1 for each new transaction (for now it's hardcoded)
                 {
                     "UserID": 0,
                     "TransactionID": 1,
@@ -207,7 +208,8 @@ def StartMenu():
                     "Transaction": -10,
                     "TransactionDescription": "10 usd on amazon.com",
                 },
-            ]
+            ]'''
+
 
             ''' do some sort of for loop here to iterate through the sqllite3 users data to see if the
             username and password that the user inputted matches any credientials that are in the system
@@ -215,7 +217,8 @@ def StartMenu():
             temporarily just for now normally I'd get these values that I'm passing into this function from the data from the table of that specific user
             '''
 
-            AccountMenu(ID, UserBalance, TransactionHistory)
+            BankDatabase.QueryLogin(UsernameLogin, PasswordLogin)
+            #AccountMenu(ID, UserBalance, TransactionHistory)
 
         elif UserOption.lower() == "forgotusername":
             print("have the user verify themselves by typing in their name that is associated with the account \n then it'll give the user the username of all account names with that associated name they inputted")
@@ -258,8 +261,7 @@ def StartMenu():
             PasswordInput = input("Now type in your password it has to contain atleast an uppercase and lowercase letter, and at the minimum 1 number character And atleast 10 characters long: ")
 
         print("Great job on making an acccount, returning back to the main menu. \n")
-
-        # For future reference here, when you figure out the SQLlite3 better, make these values into an account value that can be used as account credentials to login
+        BankDatabase.AccountCreate(UsernameInput, PasswordInput, NameInput)
         StartMenu()
         return
 StartMenu()

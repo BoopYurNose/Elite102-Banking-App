@@ -19,18 +19,42 @@ Sealious.executemany("INSERT INTO BankingAccounts VALUES (?,?,?,?,?)", SampleDat
 
 
 '''
-Sealious.execute(" SELECT rowid, * FROM BankingAccounts")
-Test = Sealious.fetchall()
 
-for items in Test:
-    print(items)
+# Uncomment this when you want to test if the database properly updated an account value
+#Sealious.execute(" SELECT rowid, * FROM BankingAccounts")
+#Test = Sealious.fetchall()
+
+#for items in Test:
+#    print(items)
+
+
+def AccountCreate(Username, Password, Name):
+    NewData = (Username, Password, Name, 0, 1)
+    Sealious.execute("INSERT INTO BankingAccounts VALUES (?,?,?,?,?)", NewData)
+    print("Account successfully created")
+    ConnectionBank.commit()
+
+
+
 
 
 def QueryLogin(userinput, passinput):
-    Sealious.execute("SELECT rowid, FROM BankingAccounts WHERE Username LIKE '{userinput}'")
+    print("worked")
+    UsernameSearch = userinput
+    Sealious.execute("SELECT rowid, * FROM BankingAccounts WHERE Username = UsernameSearch;") #WORK ON THIS
+    AccountFound = Sealious.fetchall()
+    print(AccountFound)
+    for Info in AccountFound:
+        print(Info)
+        if Info == userinput:
+            print(f"found username {Info}")
+            
+
 
 print("Successfully Ran!")
 
-ConnectionBank.commit()
+#ConnectionBank.commit() # remember to comment this out (only uncomment these both things when you have to make an update to this script REMEMBER THAT)
+#ConnectionBank.close() # This too
 
-ConnectionBank.close()
+def CloseDatabase():
+    ConnectionBank.close()
