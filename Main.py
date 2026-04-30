@@ -197,28 +197,14 @@ def StartMenu():
         elif UserOption.lower() == "login":
             UsernameLogin = input("Type your username:")
             PasswordLogin = input("Type in your password:")
-            # Validate login credentials here
-            #ID = 0 # Temporarily hardcoded just for an example
-            #UserBalance = 165.59
-            '''TransactionHistory = [ #Later each transaction will be incremented starting at 1 and incrementing + 1 for each new transaction (for now it's hardcoded)
-                {
-                    "UserID": 0,
-                    "TransactionID": 1,
-                    "Date": "4/12/26",
-                    "Transaction": -10,
-                    "TransactionDescription": "10 usd on amazon.com",
-                },
-            ]'''
-
-
-            ''' do some sort of for loop here to iterate through the sqllite3 users data to see if the
-            username and password that the user inputted matches any credientials that are in the system
-            for now since I haven't gotten the database up yet, it'll be hardcoded to login to an account with hardcoded values
-            temporarily just for now normally I'd get these values that I'm passing into this function from the data from the table of that specific user
-            '''
-
-            BankDatabase.QueryLogin(UsernameLogin, PasswordLogin)
-            #AccountMenu(ID, UserBalance, TransactionHistory)
+            try:
+                UserID, Name, Balance, LoggedIn = BankDatabase.QueryLogin(UsernameLogin, PasswordLogin)
+                print(f"{UserID}, {Name}, {Balance}, {LoggedIn}")
+            except:
+                print("Login unsucccessful returning to MainMenu")
+                StartMenu()
+                return
+            
 
         elif UserOption.lower() == "forgotusername":
             print("have the user verify themselves by typing in their name that is associated with the account \n then it'll give the user the username of all account names with that associated name they inputted")

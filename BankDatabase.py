@@ -48,16 +48,20 @@ def QueryLogin(userinput, passinput):
     for Info in AccountFound:
         #print(Info)
         if Info[1] == userinput:
-            print(f"found username {Info}")
-
-    Sealious.execute("SELECT rowid, * FROM BankingAccounts WHERE Password = ?", (PasswordSearch,))
-    AccountFind = Sealious.fetchall()
-    print(AccountFind)
-    for Pass in AccountFind:
-        if Pass[2] == passinput:
-            print(f"Found password, {Pass}") # WORK ON THIS MORE, FINISH THIS TODAY PLEASE make it check if the username and the password on the specific account are the same as the specification
-            # issue is it can query another user with the same password as another user might have so get it so it logs the user into the account with specifically the exact username, and password
-            
+            PasswordCheck = Info[2]
+            ID = Info[0]
+            PersonName = Info[3]
+            CurrentBalance = Info[4]
+            LoggedInCheck = Info[5]
+    print(PasswordCheck)
+    if PasswordCheck == passinput:
+            print(f"Found password, {PasswordCheck}")
+            Sealious.execute(
+            "UPDATE BankingAccounts SET LoggedIn = 1 WHERE Username = ? AND Password = ?",
+             (userinput, passinput))
+            ConnectionBank.commit()
+            AccountFound = Sealious.fetchall()
+            return ID, PersonName, CurrentBalance, LoggedInCheck
 
 
 print("Successfully Ran!")
