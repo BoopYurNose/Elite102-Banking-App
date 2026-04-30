@@ -95,12 +95,12 @@ def AccountCreationValidator(Name = None, Username = None, Password = None):
             return False
 
 
-def AccountMenu(ID, Balance, TransactionHistory):
+def AccountMenu(ID ,Name ,Balance):
     LineFormat(50)
-    print(f"Hello, your balance is \n {Balance}")
-    print("\n What would you like to do \n AddMoney \n WithdrawMoney \n ViewTransactions \n ManageAccounts \n BackToMainMenu \n Logout")
+    print(f"Hello, {Name} your balance is \n {Balance}")
+    print("\n What would you like to do \n AddMoney \n WithdrawMoney \n BackToMainMenu \n Logout")
     UserInput = input(":")
-    if not UserInput.lower() == "addmoney" and not UserInput.lower() == "withdrawmoney" and not UserInput.lower() == "viewtransactions" and not UserInput.lower() == "manageaccounts" and not UserInput.lower() == "backtomainmenu" and not UserInput.lower() == "logout":
+    if not UserInput.lower() == "addmoney" and not UserInput.lower() == "withdrawmoney" and not UserInput.lower() == "manageaccounts" and not UserInput.lower() == "backtomainmenu" and not UserInput.lower() == "logout":
         print("Try again you need to type in a valid choice \n returning to StartMenu")
         StartMenu()
         return
@@ -150,17 +150,6 @@ def AccountMenu(ID, Balance, TransactionHistory):
             print("Sorry you don't have enough money to withdraw this amount \n returning to main menu")
             StartMenu()
             return
-
-    elif UserInput.lower() == "viewtransactions":
-        for Transactions in TransactionHistory:
-            if ID == Transactions["UserID"]:
-                print(Transactions)
-    elif UserInput.lower() == "manageaccounts":
-        print("Display logged in accounts by displaying account usernames that have a boolean value of True (boolean value determines if it's logged in or not)")
-    elif UserInput.lower() == "backtomainmenu":
-        print("Going back to the main menu")
-        StartMenu()
-        return
     elif UserInput.lower() == "Logout":
         print("log out user here and return them to the MainMenu")
         # Query through database here and logout
@@ -204,6 +193,7 @@ def StartMenu():
                 print("Login unsucccessful returning to MainMenu")
                 StartMenu()
                 return
+            AccountMenu(UserID, Name, Balance)
             
 
         elif UserOption.lower() == "forgotusername":
