@@ -6,8 +6,7 @@ DONE: Create a database for these bank accounts
 Done: Deposit money into an account
 Done: Withdraw money (with balance validation)
 DONE: Check account balance
-List / manage existing accounts: (for this in the database I will have a simple boolean value of either true or false that will tell if the user is logged in or not based on that boolean value)
-A simple menu-driven interface (terminal UI)'''
+'''
 
 # This is my CLI if I finish this I will then make a web application version of this
 
@@ -119,7 +118,9 @@ def AccountMenu(ID ,Name ,Balance):
                 print("Not valid number")
                 StartMenu()
                 return
-        Balance = Balance + MoneyAddInput #We will change this system later
+        MoneyAddInput = int(MoneyAddInput)
+        BankDatabase.AddOrWithdrawMoney(ID, "AddMoney", MoneyAddInput)
+        Balance = Balance + MoneyAddInput
         print(f"added {MoneyAddInput} amount to your balance \n your new balance is {Balance} \n returning to main menu")
         StartMenu()
         return
@@ -141,7 +142,8 @@ def AccountMenu(ID ,Name ,Balance):
                 return
             
         WithdrawAmount = int(WithdrawAmount)
-        if Balance >= WithdrawAmount: # Doesn't work for float numbers, figure out a fix
+        if Balance >= WithdrawAmount:
+            BankDatabase.AddOrWithdrawMoney(ID, "RemoveMoney", WithdrawAmount)
             Balance = Balance - WithdrawAmount
             print(f"After withdrawing {WithdrawAmount} your new balance is {Balance} \n returning to main menu")
             StartMenu()
@@ -150,9 +152,9 @@ def AccountMenu(ID ,Name ,Balance):
             print("Sorry you don't have enough money to withdraw this amount \n returning to main menu")
             StartMenu()
             return
-    elif UserInput.lower() == "Logout":
+    elif UserInput.lower() == "logout":
         print("log out user here and return them to the MainMenu")
-        # Query through database here and logout
+        BankDatabase.Logout
         StartMenu()
         return
     

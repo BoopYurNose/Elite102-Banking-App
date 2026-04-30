@@ -35,13 +35,9 @@ def AccountCreate(Username, Password, Name):
     ConnectionBank.commit()
 
 
-
-
-
 def QueryLogin(userinput, passinput):
-    print("worked")
+    #print("worked")
     UsernameSearch = userinput
-    PasswordSearch = passinput
     Sealious.execute("SELECT rowid, * FROM BankingAccounts WHERE Username = ?", (UsernameSearch,)) #WORK ON THIS
     AccountFound = Sealious.fetchall()
     print(AccountFound)
@@ -62,8 +58,33 @@ def QueryLogin(userinput, passinput):
             ConnectionBank.commit()
             AccountFound = Sealious.fetchall()
             return ID, PersonName, CurrentBalance, LoggedInCheck
-            
 
+def Logout(ID):
+    Sealious.execute(
+        "UPDATE BankingAccounts SET LoggedIn = 0 WHERE rowid = ?",
+        (ID)
+    )
+    ConnectionBank.commit()
+    return
+
+def AddOrWithdrawMoney(ID, Choice, Amount):
+    MoneyMove = Amount
+
+    if Choice == "AddMoney":
+        Sealious.execute(
+            "UPDATE BankingAccounts SET Balance = Balance + ? WHERE rowid = ?",
+            (MoneyMove, ID)
+        )
+        ConnectionBank.commit()
+        return
+
+    elif Choice == "RemoveMoney":
+        Sealious.execute(
+            "UPDATE BankingAccounts SET Balance = Balance - ? WHERE rowid = ?",
+            (MoneyMove, ID)
+        )
+        ConnectionBank.commit()
+        return
 
 print("Successfully Ran!")
 
